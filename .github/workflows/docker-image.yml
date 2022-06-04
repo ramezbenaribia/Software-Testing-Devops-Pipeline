@@ -14,6 +14,7 @@ jobs:
       mysql:
         image: mysql
         env:
+          MYSQL_ROOT_PASSWORD: password
           MYSQL_USER: ${{secrets.MYSQL_USER}}
           MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
           MYSQL_DATABASE: ${{secrets.MYSQL_DATABASE}}
@@ -22,6 +23,7 @@ jobs:
           - 3306:3306
         volumes:
           - ${{github.workspace}}/database:/docker-entrypoint-initdb.d
+        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
 
     steps:
     - uses: actions/checkout@v3
