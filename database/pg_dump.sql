@@ -51,8 +51,7 @@ ALTER TABLE public.customers OWNER TO "ramez.ben.aribia";
 --
 
 
-DROP TABLE IF EXISTS `products`;
-CREATE TABLE `products` (
+CREATE TABLE public.products (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     name character varying NOT NULL,
      description text,
