@@ -22,12 +22,7 @@ jobs:
           - 3306:3306
         volumes:
           - ${{github.workspace}}/database:/docker-entrypoint-initdb.d
-        # wait for mysql to start by setting  health checks 
-        options: >-
-          --health-cmd="\${ORACLE_BASE}/healthcheck.sh >/dev/null || exit 1"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 3
+
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
