@@ -1,28 +1,37 @@
-version: "3.1"
+version: "3.9"
 
 services:
   db:
-    container_name: mysql
-    image: mysql
+    container_name: postgres
+    image: postgres
     healthcheck:
-      test: "/usr/bin/mysql --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} --execute \"SHOW DATABASES;\""
+      test:
+        [
+          'CMD',
+          'pg_isready',
+          '-q',
+          '-d',
+          'postgres',
+          '-U',
+          'postgres'
+        ]
       timeout: 35s
       interval: 10s
       retries: 10
     ports:
       - 3306:3306
     environment:
-      - MYSQL_USER = ${MYSQL_USER}
-      - MYSQL_PASSWORD = ${MYSQL_PASSWORD}
-      - MYSQL_DATABASE = ${MYSQL_DATABASE}
+      - POSTGRES_USER = ${POSTGRES_USER}
+      - POSTGRES_PASSWORD = ${POSTGRES_PASSWORD}
+      - POSTGRES_DB = ${POSTGRES_DB}
 
     networks:
       - webnet
     volumes:
-      - mysqldata:/var/lib/mysql/data
+      - pgdata:/var/lib/postgresql/data
       - ${PWD}/db_dump.sql:/docker-entrypoint-initdb.d/db_dump.sql
 
 volumes:
-  mysqldata:
+  pgdata:
 networks:
   webnet:

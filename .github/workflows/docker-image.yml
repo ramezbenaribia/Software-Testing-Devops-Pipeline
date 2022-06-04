@@ -12,18 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: mysql
+        image: postgres
         env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_USER: ${{secrets.MYSQL_USER}}
-          MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
-          MYSQL_DATABASE: ${{secrets.MYSQL_DATABASE}}
+          POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+          POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
+          POSTGRES_DB: ${{secrets.POSTGRES_DB}}
 
         ports:
-          - 3306:3306
+          - 5432:5432
         volumes:
           - ${{github.workspace}}/database:/docker-entrypoint-initdb.d
-        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
+        # start postgress and wait for the health checks
+        options: --health-cmd "pg_isready" --health-interval 10s --health-timeout 5s --health-retries 10
 
     steps:
     - uses: actions/checkout@v3
@@ -40,7 +40,7 @@ jobs:
         npm run test
     - name: Set up Testing Database and Run End to End Tests.
       run: |
-        cat database/db_dump.sql | docker exec -i $(docker ps -q) mysql -U ${{secrets.MYSQL_USER}} -P ${{secrets.MYSQL_PASSWORD}}  -D  ${{secrets.MYSQL_DATABASE}}
+        cat database/db_dump.sql | docker exec -i $(docker ps -q) psql -U ${{secrets.DB_USER}}  -d  ${{secrets.DB_NAME}}
         npm run test:e2e
 
 
