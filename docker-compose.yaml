@@ -1,0 +1,29 @@
+version: "3.1"
+
+services:
+  db:
+    container_name: mysql
+    image: mysql
+    # healthcheck:
+    #   test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+    #   timeout: 35s
+    #   interval: 10s
+    #   retries: 10
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD= ${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER = ${MYSQL_USER}
+      - MYSQL_PASSWORD = ${MYSQL_PASSWORD}
+      - MYSQL_DATABASE = ${MYSQL_DATABASE}
+
+    networks:
+      - webnet
+    volumes:
+      - mysqldata:/var/lib/mysql/data
+      - ${PWD}/db_dump.sql:/docker-entrypoint-initdb.d/db_dump.sql
+
+volumes:
+  mysqldata:
+networks:
+  webnet:

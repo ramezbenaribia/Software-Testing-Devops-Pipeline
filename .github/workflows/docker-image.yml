@@ -1,0 +1,52 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_test:
+
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: mysql
+        env:
+          MYSQL_USER: ${{secrets.MYSQL_USER}}
+          MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
+          MYSQL_DATABASE: ${{secrets.MYSQL_DATABASE}}
+
+        ports:
+          - 3306:3306
+        volumes:
+          - ${{github.workspace}}/database:/docker-entrypoint-initdb.d
+        # wait for mysql to start by setting  health checks 
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 14
+    - name: Build the project
+      run: |
+        npm install webpack @nestjs/cli
+        npm install
+        npm run build
+    - name: Run Unit and Integration tests
+      run: |
+        npm run test
+    - name: Set up Testing Database and Run End to End Tests.
+      run: |
+        cat database/db_dump.sql | docker exec -i $(docker ps -q) psql -U ${{secrets.MYSQL_USER}}  -d  ${{secrets.MYSQL_DATABASE}}
+        npm run test:e2e
+
+
+
+  
+      
