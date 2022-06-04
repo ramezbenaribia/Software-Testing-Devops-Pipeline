@@ -19,7 +19,7 @@ services:
       interval: 10s
       retries: 10
     ports:
-      - 3306:3306
+      - 5432:5432
     environment:
       - POSTGRES_USER = ${POSTGRES_USER}
       - POSTGRES_PASSWORD = ${POSTGRES_PASSWORD}
@@ -29,7 +29,7 @@ services:
       - webnet
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ${PWD}/db_dump.sql:/docker-entrypoint-initdb.d/db_dump.sql
+      - ${PWD}/pg_dump.sql:/docker-entrypoint-initdb.d/pg_dump.sql
 
 volumes:
   pgdata:
