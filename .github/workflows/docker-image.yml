@@ -40,7 +40,7 @@ jobs:
         npm run test
     - name: Set up Testing Database and Run End to End Tests.
       run: |
-        cat database/db_dump.sql | docker exec -i $(docker ps -q) mysql -U ${{secrets.MYSQL_USER}}  -p  ${{secrets.MYSQL_PASSWORD}}
+        cat database/db_dump.sql | docker exec -i $(docker ps -q) mysql -U ${{secrets.MYSQL_USER}}  -D  ${{secrets.MYSQL_DATABASE}}
         npm run test:e2e
 
 
