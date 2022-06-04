@@ -11,7 +11,7 @@ jobs:
 
     runs-on: ubuntu-latest
     services:
-      postgres:
+      mysql:
         image: mysql
         env:
           MYSQL_USER: ${{secrets.MYSQL_USER}}

@@ -4,11 +4,11 @@ services:
   db:
     container_name: mysql
     image: mysql
-    # healthcheck:
-    #   test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-    #   timeout: 35s
-    #   interval: 10s
-    #   retries: 10
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 35s
+      interval: 10s
+      retries: 10
     ports:
       - 3306:3306
     environment:
