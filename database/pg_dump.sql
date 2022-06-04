@@ -38,9 +38,8 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.customers (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    `custmer_name` varchar(45) DEFAULT NULL,
-    `customer_field` varchar(45) DEFAULT NULL,
-    PRIMARY KEY (`customer_code`)
+    "custmer_name" varchar(45) DEFAULT NULL,
+    "customer_field" varchar(45) DEFAULT NULL,
 );
 
 
@@ -54,10 +53,9 @@ ALTER TABLE public.customers OWNER TO "ramez.ben.aribia";
 CREATE TABLE public.products (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     name character varying NOT NULL,
-     description text,
-    `product_type` varchar(45) DEFAULT NULL,
-    PRIMARY KEY (`product_code`),
-     "ownerId" uuid
+    description text,
+    "product_type" varchar(45) DEFAULT NULL,
+    "ownerId" uuid
 );
 
 
@@ -109,17 +107,6 @@ INSERT INTO public.customers VALUES ('afc3f140-c4e0-4770-a014-095de6a9fb4f', 'Ze
 --
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: ramez.ben.aribia
 --
-
-DROP TABLE IF EXISTS `products`;
-CREATE TABLE `products` (
-    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    name character varying NOT NULL,
-     description text,
-    `product_type` varchar(45) DEFAULT NULL,
-    PRIMARY KEY (`product_code`),
-     "ownerId" uuid
-);
-
 
 
 INSERT INTO public.products VALUES ('9104c0ef-d6af-47ef-9bbd-7b71ab0e4e26', 'PC', NULL, 'IT',  '57603cd2-533c-4791-8adc-cf3ac1448b7d');
