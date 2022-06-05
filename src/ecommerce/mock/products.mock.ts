@@ -16,9 +16,8 @@ export const products: ProductEntity[] = [
   },
   {
     id: 'fd097652-1cfa-4c98-bff8-d85efc43b007',
-    name: 'Phone',
+    name: 'SPEAKER',
     product_type: 'IT',
-
   },
   {
     id: 'd9e6d085-6602-43e0-a4f6-2a0c1363d4bc',

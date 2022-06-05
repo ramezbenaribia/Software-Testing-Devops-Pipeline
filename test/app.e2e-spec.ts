@@ -22,7 +22,7 @@ describe('AppController (e2e)', () => {
     await app.init();
     dbOwner = await app
       .get<OwnersService>(OwnersService)
-      .findOne({ where: { username: 'ramez.ben.aribia' } });
+      .findOne({ where: { username: owner.username } });
   });
 
   it('/ (GET)', () => {
@@ -46,7 +46,7 @@ describe('AppController (e2e)', () => {
         delete payload.owner.id;
         expect({
           id: 'fd097652-1cfa-4c98-bff8-d85efc43b007',
-          name: 'Phone',
+          name: 'SPEAKER',
           description: null,
           owner: dbOwner,
           customers: [],
