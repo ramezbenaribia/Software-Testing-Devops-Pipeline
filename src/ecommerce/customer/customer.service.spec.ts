@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { CustomerEntity } from '../entity/Customer.entity';
+import { CustomerEntity } from '../entity/customer.entity';
 import { CustomerService } from './customer.service';
 import {
   mockCustomerRepository,
 } from '../test-artifacts/repositories/mocks';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { CreateCustomerDto } from '../dto/Customer.create.dto';
+import { CreateCustomerDto } from '../dto/customer.create.dto';
 
 describe('CustomerService', () => {
   let service: CustomerService;

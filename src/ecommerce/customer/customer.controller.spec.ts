@@ -5,7 +5,7 @@ import {
   mockCustomerRepository,
 } from '../test-artifacts/repositories/mocks';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { CustomerEntity } from '../entity/Customer.entity';
+import { CustomerEntity } from '../entity/customer.entity';
 describe('Customer Controller', () => {
   let controller: CustomerController;
 
