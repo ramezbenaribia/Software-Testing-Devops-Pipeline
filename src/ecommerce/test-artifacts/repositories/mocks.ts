@@ -34,7 +34,11 @@ export const testProducts: ProductEntity[] = [
 export const testCustomer: CustomerEntity = {
   id: 'test-customer-id',
   customer_name: 'cutomer name test',
-  customer_field: 'customer filed test'
+  email: 'test-owner-email',
+  password: 'test-customer-password',
+  hashPassword: function (): Promise<void> {
+    throw new Error('Function not implemented.');
+  },
 };
 
 
@@ -52,7 +56,8 @@ export const mockCustomerRepository = {
   create: jest.fn((customerDto: CreateCustomerDto): CustomerEntity => {
     const customer = new CustomerEntity();
     customer.customer_name = customerDto.customer_name;
-    customer.customer_field = customerDto.customer_field;
+    customer.password = customerDto.password;
+    customer.email = customerDto.email;
     return customer;
   }),
   save: jest.fn((customer: CustomerEntity): CustomerEntity => customer),

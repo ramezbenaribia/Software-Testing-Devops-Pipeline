@@ -27,12 +27,13 @@ export class CustomerService {
 
 
   async createCustomer(CustomerDto: CreateCustomerDto): Promise<CustomerDto> {
-    const { customer_name, customer_field } = CustomerDto;
+    const { customer_name, password, email } = CustomerDto;
 
 
     const Customer: CustomerEntity = await this.CustomerRepo.create({
       customer_name,
-      customer_field
+      password,
+      email
     });
 
     await this.CustomerRepo.save(Customer);

@@ -1,4 +1,6 @@
-import { IsNotEmpty } from 'class-validator';
+import { ProductDto } from './product.dto';
+import { IsNotEmpty, IsEmail } from 'class-validator';
+
 
 export class CustomerDto {
   @IsNotEmpty()
@@ -7,5 +9,12 @@ export class CustomerDto {
   @IsNotEmpty()
   customer_name: string;
 
-  customer_field?: string;
+
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+
+  bought_products?: ProductDto[];
+
+
 }

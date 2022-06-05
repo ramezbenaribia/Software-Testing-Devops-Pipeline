@@ -21,11 +21,12 @@ describe('CustomerService', () => {
 
     createCustomer: jest.fn(
       async (CustomerDto: CreateCustomerDto): Promise<CustomerEntity> => {
-        const { customer_name, customer_field } = CustomerDto;
+        const { customer_name, email, password } = CustomerDto;
 
         const Customer: CustomerEntity = await mockCustomerRepository.create({
           customer_name,
-          customer_field
+          password,
+          email
         });
         await mockCustomerRepository.save(Customer);
         return Customer;
@@ -67,9 +68,15 @@ describe('CustomerService', () => {
   });
 
   it('should create Customer', async () => {
-    const Customer = await service.createCustomer({ customer_name: 'Customer 3' });
+    const Customer = await service.createCustomer({
+      customer_name: 'Customer 3',
+      email: 'customer.flen@gmail.com',
+      password: '123456',
+
+    });
     expect(Customer).toBeDefined();
     expect(Customer.customer_name).toBe('Customer 3');
+    expect(Customer.email).toBe('customer.flen@gmail.com');
   });
   it('should destroy Customer', async () => {
     const Customer = await service.destroyCustomer('test-customer-id');

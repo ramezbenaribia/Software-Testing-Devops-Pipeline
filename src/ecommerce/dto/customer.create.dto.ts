@@ -1,10 +1,13 @@
-import { IsNotEmpty, MaxLength, IsOptional } from 'class-validator';
+import { IsNotEmpty, MaxLength, IsOptional, IsEmail } from 'class-validator';
 
 export class CreateCustomerDto {
   @IsNotEmpty()
   customer_name: string;
 
-  @IsOptional()
-  @MaxLength(50)
-  customer_field?: string;
+  @IsNotEmpty()
+  password: string;
+
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
 }

@@ -1,3 +1,4 @@
+import { CustomerDto } from './customer.dto';
 import { IsNotEmpty } from 'class-validator';
 import { OwnerDto } from './owner.dto';
 
@@ -12,4 +13,6 @@ export class ProductDto {
   product_type?: string;
 
   owner: OwnerDto;
+
+  customers?: CustomerDto[];
 }

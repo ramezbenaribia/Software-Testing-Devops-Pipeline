@@ -6,9 +6,9 @@ import { ProductEntity } from './../entity/product.entity';
 import { ProductDto } from "../dto/product.dto";
 
 export const toProductDto = (data: ProductEntity): ProductDto => {
-  const { id, name, description, product_type, owner } = data;
+  const { id, name, description, product_type, owner, customers } = data;
 
-  const productDto: ProductDto = {
+  let productDto: ProductDto = {
     id,
     name,
     description,
@@ -16,17 +16,30 @@ export const toProductDto = (data: ProductEntity): ProductDto => {
     owner: owner ? toOwnerDto(owner) : null,
   };
 
+  if (customers) {
+    productDto = {
+      ...productDto,
+      customers: customers.map((customer: CustomerEntity) => toCustomerDto(customer)),
+    };
+  }
+
   return productDto;
 };
 
 export const toCustomerDto = (data: CustomerEntity): CustomerDto => {
-  const { id, customer_name, customer_field } = data;
+  const { id, customer_name, email, bought_products } = data;
 
-  const customerDto: CustomerDto = {
+  let customerDto: CustomerDto = {
     id,
     customer_name,
-    customer_field
+    email
   };
+  if (bought_products) {
+    customerDto = {
+      ...customerDto,
+      bought_products: bought_products.map((product: ProductEntity) => toProductDto(product)),
+    };
+  }
 
   return customerDto;
 };

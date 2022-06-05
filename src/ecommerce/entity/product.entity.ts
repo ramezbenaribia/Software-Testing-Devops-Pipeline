@@ -1,8 +1,10 @@
+import { CustomerEntity } from './customer.entity';
 import {
     Entity,
     PrimaryGeneratedColumn,
     Column,
     ManyToOne,
+    ManyToMany,
 } from 'typeorm';
 
 import { OwnerEntity } from './owner.entity';
@@ -17,5 +19,8 @@ export class ProductEntity {
 
     @ManyToOne((type) => OwnerEntity, { cascade: true })
     owner?: OwnerEntity;
+
+    @ManyToMany((type) => CustomerEntity, (customer) => customer.bought_products)
+    customers?: CustomerEntity[];
 
 }
