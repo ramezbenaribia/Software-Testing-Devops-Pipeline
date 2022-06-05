@@ -56,7 +56,7 @@ describe('AppController (e2e)', () => {
           name: 'SPEAKER',
           description: null,
           product_type: 'IT',
-          owner: '57603cd2-533c-4791-8adc-cf3ac1448b7d',
+          owner: dbOwner,
           customers: [],
         });
       });
