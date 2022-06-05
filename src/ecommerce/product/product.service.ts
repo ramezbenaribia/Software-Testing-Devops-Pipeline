@@ -20,7 +20,10 @@ export class ProductService {
   ) { }
 
   async getAllProducts(): Promise<ProductDto[]> {
-    const products = await this.productRepo.find({ relations: ['products', 'owner'] });
+    const products = await this.productRepo.find({
+      where: {},
+      relations: ['products', 'owner']
+    });
     return products.map((product) => toProductDto(product));
   }
 

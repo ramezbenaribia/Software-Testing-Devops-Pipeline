@@ -38,8 +38,9 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.customers (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    "customer_name" varchar(45) DEFAULT NULL,
-    "customer_field" varchar(45) DEFAULT NULL,
+    customer_name varchar(45) DEFAULT NULL,
+    password character varying NOT NULL,
+    email character varying NOT NULL,
 );
 
 
@@ -98,10 +99,8 @@ ALTER TABLE public.owners OWNER TO "ramez.ben.aribia";
 --
 
 
-INSERT INTO public.customers VALUES ('0166fa6b-22f1-4bac-b715-6e878cdece90', 'Ramez Ben Aribia', 'E-Commerce');
-INSERT INTO public.customers VALUES ('5ec85af9-ecf2-4a39-b772-5c8df018967c', 'Mahdi Hamdi', 'E-Commerce');
-INSERT INTO public.customers VALUES ('098fd1ea-ecb0-4693-9128-8e2a5b96eeb4', 'Ghassen Zakraoui', 'IT');
-INSERT INTO public.customers VALUES ('afc3f140-c4e0-4770-a014-095de6a9fb4f', 'Zeineb Labbene', 'IT');
+INSERT INTO public.customers VALUES ('0166fa6b-22f1-4bac-b715-6e878cdece90', 'ramez.ben.aribia', '$2b$10$wEtaRojLcNAtzfb4BmWp4ulaUBIQYrAqD8CaL9Hof/GI8KMJqN9I.', 'ramez.ben.aribia@gmail.com');
+
 
 
 --
