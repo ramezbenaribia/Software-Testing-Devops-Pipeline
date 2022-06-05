@@ -13,7 +13,7 @@ env:
   ECR_REPOSITORY: "ramezdevopsproject"         
   ECS_SERVICE: "ramezdevops-service"               
   ECS_CLUSTER: "ramez-project"                
-  ECS_TASK_DEFINITION: "./taskdef.json" 
+  ECS_TASK_DEFINITION: "./taskdefinition.json" 
   CONTAINER_NAME: "ramez"               
    
                                              
