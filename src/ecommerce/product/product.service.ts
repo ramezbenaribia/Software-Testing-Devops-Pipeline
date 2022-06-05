@@ -29,7 +29,7 @@ export class ProductService {
   async getOneProduct(id: string): Promise<ProductDto> {
     const product = await this.productRepo.findOne({
       where: { id },
-      relations: ['owner', 'customers'],
+      relations: ['customers'],
     });
 
     if (!product) {
@@ -47,7 +47,7 @@ export class ProductService {
     createProductDto: CreateProductDto,
   ): Promise<ProductDto> {
     const { name, description, product_type } = createProductDto;
-    const { username } = await this.ownersService.findOne({ id: userId });
+    const { username } = await this.ownersService.findOne({ where: { userId } });
     const owner = await this.ownersService.findOne({ where: { username } });
 
     const product: ProductEntity = await this.productRepo.create({
