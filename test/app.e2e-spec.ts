@@ -67,7 +67,7 @@ describe('AppController (e2e)', () => {
       .send({
         name: 'test-product-name',
         description: 'Random description',
-        userId: dbOwner.id,
+        userId: '57603cd2-533c-4791-8adc-cf3ac1448b7d',
       })
       .expect(201)
       .then((response) => {
@@ -86,6 +86,7 @@ describe('AppController (e2e)', () => {
       .send({
         name: 'Edited Name',
         description: 'Edited description of the Office Chores',
+        product_type: 'updated product Type',
         userId: dbOwner.id,
       })
       .expect(200)
@@ -95,6 +96,7 @@ describe('AppController (e2e)', () => {
           id: 'fd097652-1cfa-4c98-bff8-d85efc43b007',
           name: 'Edited Name',
           description: 'Edited description of the Office Chores',
+          product_type: 'updated product Type',
           owner: dbOwner,
           customers: [],
         }).toStrictEqual(payload);

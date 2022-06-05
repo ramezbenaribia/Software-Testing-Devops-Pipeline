@@ -53,7 +53,7 @@ export class ProductService {
     const product: ProductEntity = await this.productRepo.create({
       name,
       description,
-      owner,
+      owner
     });
 
     await this.productRepo.save(product);
