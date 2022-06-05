@@ -40,7 +40,7 @@ CREATE TABLE public.customers (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     customer_name varchar(45) DEFAULT NULL,
     password character varying NOT NULL,
-    email character varying NOT NULL,
+    email character varying NOT NULL
 );
 
 

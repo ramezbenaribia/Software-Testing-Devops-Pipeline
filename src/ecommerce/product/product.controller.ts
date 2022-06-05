@@ -1,6 +1,5 @@
 import { CreateProductDto } from './../dto/product.create.dto';
 import { ProductDto } from './../dto/product.dto';
-import { products } from './../mock/products.mock';
 import { ProductListDto } from './../dto/product.list.dto';
 import {
   Controller,
@@ -10,8 +9,6 @@ import {
   Body,
   Put,
   Delete,
-  UsePipes,
-  UseGuards,
   Req,
 } from '@nestjs/common';
 import { ProductService } from './product.service';

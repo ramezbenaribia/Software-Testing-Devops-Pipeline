@@ -2,10 +2,10 @@ import { CustomerEntity } from './ecommerce/entity/customer.entity';
 import { ProductEntity } from './ecommerce/entity/product.entity';
 import { OwnerEntity } from './ecommerce/entity/owner.entity';
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EcommerceModule } from './ecommerce/ecommerce.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [

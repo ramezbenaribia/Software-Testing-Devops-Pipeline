@@ -22,7 +22,7 @@ describe('AppController (e2e)', () => {
     await app.init();
     dbOwner = await app
       .get<OwnersService>(OwnersService)
-      .findOne({ username: owner.username });
+      .findOne({ where: { username: 'ramez.ben.aribia' } });
   });
 
   it('/ (GET)', () => {
