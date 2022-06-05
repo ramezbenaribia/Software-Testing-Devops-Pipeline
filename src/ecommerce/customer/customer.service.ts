@@ -14,6 +14,15 @@ export class CustomerService {
     private readonly CustomerRepo: Repository<CustomerEntity>,
   ) { }
 
+
+
+  async getAllCustomers(): Promise<CustomerDto[]> {
+    const customers = await this.CustomerRepo.find({
+      where: {},
+    });
+    return customers.map((customer) => toCustomerDto(customer));
+  }
+
   async getCustomer(id: string): Promise<CustomerDto> {
     const Customer: CustomerEntity = await this.CustomerRepo.findOne({ where: { id } });
 
