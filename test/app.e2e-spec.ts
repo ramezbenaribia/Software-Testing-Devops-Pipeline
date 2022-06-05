@@ -20,9 +20,16 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
-    dbOwner = await app
-      .get<OwnersService>(OwnersService)
-      .findOne({ where: { username: owner.username } });
+    // dbOwner = await app
+    //   .get<OwnersService>(OwnersService)
+    //   .findOne({ where: { username: owner.username } });
+
+    dbOwner = {
+      id: '57603cd2-533c-4791-8adc-cf3ac1448b7d',
+      username: 'ramez.ben.aribia',
+      email: 'ramez.ben.aribia@gmail.com',
+
+    }
   });
 
   it('/ (GET)', () => {
