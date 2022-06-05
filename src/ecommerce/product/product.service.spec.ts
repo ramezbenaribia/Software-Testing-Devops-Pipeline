@@ -99,10 +99,10 @@ describe('ProductService', () => {
   it('should return one product', async () => {
     const product = await service.getOneProduct('test-product-id-1');
     expect(product).toBeDefined();
-    expect(product.name).toBe('test-product-name-1');
+    expect(product.name).toBe('Product 1');
   });
   it('should create a product', async () => {
-    const userdto: OwnerDto = {
+    const ownerdto: OwnerDto = {
       id: 'test-owner-id',
       username: 'test-owner-name',
       email: 'test-owner-email',
@@ -110,7 +110,7 @@ describe('ProductService', () => {
     const createProductDto: CreateProductDto = {
       name: 'test-product-name-1',
       description: 'test-product-description-1',
-      userId: userdto.id,
+      userId: ownerdto.id,
     };
     const product = await service.createProduct('test-owner-id', createProductDto);
     expect(product).toBeDefined();

@@ -18,13 +18,13 @@ export const testOwner: OwnerEntity = {
 };
 export const testProducts: ProductEntity[] = [
   {
-    id: '12138-1egaze-1e1e1e-1e1e1e',
+    id: 'test-product-id-1',
     name: 'Product 1',
     description: 'Descritpion 1',
     product_type: 'Product Type 1',
   },
   {
-    id: 'e123f-1egaze-1e1e1e-1e1e1e',
+    id: 'test-product-id-2',
     name: 'Product 2',
     description: 'Descritpion 2',
     product_type: 'Product Type 2',
