@@ -19,7 +19,6 @@ export const products: ProductEntity[] = [
     name: 'Phone',
     product_type: 'IT',
 
-
   },
   {
     id: 'd9e6d085-6602-43e0-a4f6-2a0c1363d4bc',

@@ -1,73 +1,77 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Software Testing: Unit, Integration, End-to-end
+This repository will hold an example of how to test a backend application. 
+## Navigation guide
+- You'll find the test written in files following this glob pattern: `*.spec.ts`
+- The mocked data will be contained in this [products.mock.ts](./src/products/mock/products.mock.ts) file.
+- The e2e tests are written in this file: [app.e2e-spec.ts](./test/app.e2e-spec.ts).
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Running the tests:
+To run the test, we have to first to build our project and startup postgres with docker.
+Follow these steps:
+1. Clone the repository.
+2. `npm install`
+3. `npm run build`
+4. `docker-compose up`
+5. `npm run test` for unit and integration tests.
+6. `npm run test:e2e` to run the e2e tests.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Detailed explanation
+For the unit tests, since we'd want to mock the API calls and the Database calls, I encapculated the mocked repositories pattern used for the different entities in this [file](./src/products/test-artifacts/repositories/mocks.ts). This is a brief explanation of the file:
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ npm install
+Every repository is in this form: 
+```typescript
+const xRepository = {
+  find: jest.fn(),
+  findOne: jest.fn(),
+  create: jest.fn(),
+  delete: jest.fn(),
+  update: jest.fn(),
+}
 ```
+Then the jest library allows to mock the implementation of the repository functions to fit our test logic.
 
-## Running the app
+```typescript
 
-```bash
-# development
-$ npm run start
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        OwnersService,
+        {
+          provide: getRepositoryToken(UserEntity),
+          useValue: mockOwnerRepository,
+        },
+      ],
+    })
+      .overrideProvider(OwnersService)
+      .useValue(mockOwnerService)
+      .compile();
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+    service = module.get<OwnersService>(OwnersService);
+  });
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+In the normal service definition, we defined it this way instead
+```typescript
+export class OwnersService {
+  constructor(
+    @InjectRepository(OwnerEntity)
+    private readonly OwnerRepo: Repository<OwnerEntity>,
+  ) {}
+  // Some methods definitions
+}
 ```
+The ownerRepo is a dependency of the service, so we have to overwrite it with our mocked dependency to run the unit tests.
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+After the dependencies are mocked, we now have to mock the service itself. This can be achieved like this: 
+```typescript
+describe('OwnersService', () => {
+  let service: OwnersService;
+  const mockOwnerService = {
+    findOne: jest.fn((options) => {
+      return mockOwnerRepository.findOne(options.id);
+    }),
+    create: jest.fn(
+      async (userDto: CreateOwnerDto): Promise<OWnerEntity> =>
+        mockUserRepository.create(OwnerDto),
+    ),
+  };
+```
