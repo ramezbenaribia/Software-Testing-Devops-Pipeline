@@ -38,7 +38,7 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.customers (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    "custmer_name" varchar(45) DEFAULT NULL,
+    "customer_name" varchar(45) DEFAULT NULL,
     "customer_field" varchar(45) DEFAULT NULL,
 );
 
@@ -113,7 +113,7 @@ INSERT INTO public.products VALUES ('9104c0ef-d6af-47ef-9bbd-7b71ab0e4e26', 'PC'
 INSERT INTO public.products VALUES ('f794689b-a9e2-4404-8aa4-34192f6b8003', 'PHONE', NULL, 'IT',  NULL);
 INSERT INTO public.products VALUES ('d9e6d085-6602-43e0-a4f6-2a0c1363d4bc', 'TV', NULL, 'IT',  NULL);
 INSERT INTO public.products VALUES ('fd097652-1cfa-4c98-bff8-d85efc43b007', 'SPEAKER', NULL, 'IT',  '57603cd2-533c-4791-8adc-cf3ac1448b7d');
-INSERT INTO public.products VALUES ('45123a60-ae65-4911-8ee3-d5a2e7b4a87d', 'FREEDGE', NULL, 'IT',  '57603cd2-533c-4791-8adc-cf3ac1448b7d');
+INSERT INTO public.products VALUES ('45123a60-ae65-4911-8ee3-d5a2e7b4a87d', 'refrigerator', NULL, 'IT',  '57603cd2-533c-4791-8adc-cf3ac1448b7d');
 INSERT INTO public.products VALUES ('8d1a2250-b4bf-4c91-8ad7-7c973b65962f', 'SMART WATCH', 'A new awsome watch',  '2022-05-28 10:39:21.998489', NULL);
 
 
