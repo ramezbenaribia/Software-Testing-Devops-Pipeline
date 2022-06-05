@@ -29,6 +29,7 @@ export class ProductService {
   async getOneProduct(id: string): Promise<ProductDto> {
     const product = await this.productRepo.findOne({
       where: { id },
+      relations: ['owner', 'customers'],
     });
 
     if (!product) {
