@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { CreateCustomerDto } from '../dto/Customer.create.dto';
-import { CustomerDto } from '../dto/Customer.dto';
-import { CustomerEntity } from '../entity/Customer.entity';
+import { CreateCustomerDto } from '../dto/customer.create.dto';
+import { CustomerDto } from '../dto/customer.dto';
+import { CustomerEntity } from '../entity/customer.entity';
 import { toCustomerDto } from '../mapper/mapper';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

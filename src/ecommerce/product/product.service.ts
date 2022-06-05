@@ -15,7 +15,7 @@ export class ProductService {
   [x: string]: any;
   constructor(
     @InjectRepository(OwnerEntity)
-    private readonly productRepo: Repository<OwnerEntity>,
+    private readonly productRepo: Repository<ProductEntity>,
     private readonly ownersService: OwnersService,
   ) { }
 

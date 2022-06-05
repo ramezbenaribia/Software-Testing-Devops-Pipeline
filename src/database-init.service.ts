@@ -22,7 +22,7 @@ export class DatabaseInitService {
         if (!user) {
           this.ownerEntity = ownerRepository.create({
             username: 'ramez.ben.aribia',
-            password: '@dF%^hGb03W~',
+            password: 'ramez.ben.aribia',
             email: 'ramez.ben.aribia@gmail.com',
           });
           await ownerRepository.save(this.ownerEntity);

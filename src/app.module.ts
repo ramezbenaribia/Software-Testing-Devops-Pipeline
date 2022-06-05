@@ -19,7 +19,6 @@ import { EcommerceModule } from './ecommerce/ecommerce.module';
       database: 'devopsDB',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-      keepConnectionAlive: true,
     }),
     TypeOrmModule.forFeature([OwnerEntity, ProductEntity, CustomerEntity]),
   ],
