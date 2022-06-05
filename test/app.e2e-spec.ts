@@ -1,11 +1,10 @@
+import { OwnersService } from './../src/ecommerce/owner/owners.service';
 import { ProductService } from './../src/ecommerce/product/product.service';
-import { products } from './../src/ecommerce/mock/products.mock';
 import { OwnerDto } from './../src/ecommerce/dto/owner.dto';
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
-import { OwnersService } from 'src/ecommerce/owner/owners.service';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
