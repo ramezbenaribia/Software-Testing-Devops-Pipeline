@@ -33,6 +33,7 @@ export class ProductController {
     @Body() createProductDto: CreateProductDto,
     @Req() req: any,
   ): Promise<ProductDto> {
+    console.log(createProductDto);
     const { userId } = createProductDto;
 
     return await this.productService.createProduct(userId, createProductDto);
