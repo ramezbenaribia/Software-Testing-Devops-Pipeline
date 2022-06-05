@@ -61,9 +61,9 @@ describe('CustomerService', () => {
     expect(service).toBeDefined();
   });
   it('should find a Customer', async () => {
-    const Customer = await service.getCustomer('12138-1egaze-1e1e1e-1e1e1e');
+    const Customer = await service.getCustomer('test-customer-id');
     expect(Customer).toBeDefined();
-    expect(Customer.customer_name).toBe('Customer 1');
+    expect(Customer.customer_name).toBe('cutomer name test');
   });
 
   it('should create Customer', async () => {
@@ -72,8 +72,8 @@ describe('CustomerService', () => {
     expect(Customer.customer_name).toBe('Customer 3');
   });
   it('should destroy Customer', async () => {
-    const Customer = await service.destroyCustomer('12138-1egaze-1e1e1e-1e1e1e');
+    const Customer = await service.destroyCustomer('test-customer-id');
     expect(Customer).toBeDefined();
-    expect(Customer.customer_name).toBe('Customer 1');
+    expect(Customer.customer_name).toBe('cutomer name test');
   });
 });

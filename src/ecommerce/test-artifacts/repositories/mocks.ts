@@ -30,8 +30,9 @@ export const testProducts: ProductEntity[] = [
     product_type: 'Product Type 2',
   },
 ];
+
 export const testCustomer: CustomerEntity = {
-  id: 'test-owner-id',
+  id: 'test-customer-id',
   customer_name: 'cutomer name test',
   customer_field: 'customer filed test'
 };
