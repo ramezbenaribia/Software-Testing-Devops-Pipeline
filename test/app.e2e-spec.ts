@@ -72,7 +72,6 @@ describe('AppController (e2e)', () => {
       })
       .expect(201)
       .then((response) => {
-        console.log(response)
         const payload = response.body;
         delete payload.id;
         expect(payload).toStrictEqual({
