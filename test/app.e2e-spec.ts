@@ -67,6 +67,7 @@ describe('AppController (e2e)', () => {
       .send({
         name: 'test-product-name',
         description: 'Random description',
+        product_type: 'product type',
         userId: '57603cd2-533c-4791-8adc-cf3ac1448b7d',
       })
       .expect(201)
@@ -76,6 +77,7 @@ describe('AppController (e2e)', () => {
         expect(payload).toStrictEqual({
           name: 'test-product-name',
           description: 'Random description',
+          product_type: 'product type',
           owner: dbOwner,
         });
       });

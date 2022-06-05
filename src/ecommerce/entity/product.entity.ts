@@ -15,7 +15,7 @@ export class ProductEntity {
     @PrimaryGeneratedColumn('uuid') id: string;
     @Column({ type: 'varchar', nullable: false }) name: string;
     @Column({ type: 'text', nullable: true }) description?: string;
-    @Column({ type: 'varchar', nullable: false }) product_type: string;
+    @Column({ type: 'varchar', nullable: false }) product_type?: string;
 
     @ManyToOne((type) => OwnerEntity, { cascade: true })
     owner?: OwnerEntity;
