@@ -22,7 +22,7 @@ export class ProductService {
   async getAllProducts(): Promise<ProductDto[]> {
     const products = await this.productRepo.find({
       where: {},
-      relations: ['products', 'owner']
+      relations: ['owner']
     });
     return products.map((product) => toProductDto(product));
   }
@@ -30,7 +30,7 @@ export class ProductService {
   async getOneProduct(id: string): Promise<ProductDto> {
     const product = await this.productRepo.findOne({
       where: { id },
-      relations: ['products', 'owner'],
+      relations: ['owner'],
     });
 
     if (!product) {
@@ -85,7 +85,7 @@ export class ProductService {
 
     product = await this.productRepo.findOne({
       where: { id },
-      relations: ['products', 'owner'],
+      relations: ['owner'],
     }); // re-query
 
     return toProductDto(product);
@@ -94,7 +94,7 @@ export class ProductService {
   async destroyProduct(id: string): Promise<ProductDto> {
     const product: ProductEntity = await this.productRepo.findOne({
       where: { id },
-      relations: ['products', 'owner'],
+      relations: ['owner'],
     });
 
     if (!product) {
