@@ -1,3 +1,6 @@
+# in this second deployment I am going to use my friend Amine Haj Ali's account because I don't have budgets to creats an ECS Repository 
+# so I am just going to change the access keys of aws 
+
 name: Deploy to Amazon ECS
 
 on:
@@ -9,7 +12,7 @@ env:
   AWS_REGION: "eu-central-1"    
   ECR_REPOSITORY: "ramezdevopsproject"         
   ECS_SERVICE: "ramezdevops-service"               
-  ECS_CLUSTER: "ramez"                
+  ECS_CLUSTER: "ramez-project"                
   ECS_TASK_DEFINITION: "./taskdef.json" 
   CONTAINER_NAME: "ramez"               
    
