@@ -46,7 +46,7 @@ export class ProductService {
     createProductDto: CreateProductDto,
   ): Promise<ProductDto> {
     const { name, description, product_type } = createProductDto;
-    const { username } = await this.ownersService.findOne({ where: { id } });
+    const { username } = await this.ownersService.findOne({ id });
     const owner = await this.ownersService.findOne({ where: { username } });
 
     const product: ProductEntity = await this.productRepo.create({
