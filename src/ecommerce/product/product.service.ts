@@ -42,11 +42,11 @@ export class ProductService {
   }
 
   async createProduct(
-    userId: string,
+    id: string,
     createProductDto: CreateProductDto,
   ): Promise<ProductDto> {
     const { name, description, product_type } = createProductDto;
-    const { username } = await this.ownersService.findOne({ where: { id: userId } });
+    const { username } = await this.ownersService.findOne({ where: { id } });
     const owner = await this.ownersService.findOne({ where: { username } });
 
     const product: ProductEntity = await this.productRepo.create({
