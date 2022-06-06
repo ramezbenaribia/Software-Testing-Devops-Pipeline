@@ -34,25 +34,13 @@ jobs:
         npm install webpack @nestjs/cli
         npm install
         npm run build   
-
-  unit_integration_tests:
-    runs-on: ubuntu-latest
-    needs:
-      - build_release
-    steps:
-      - name: Run Unit and Integration tests
-        run: |
-          npm run test
-
-  testing-Database_e2e-Test:
-    runs-on: ubuntu-latest
-    needs:
-      - unit_integration_tests
-    steps:
-      - name: Set up Testing Database and Run End to End Tests.
-        run: |
-          cat database/pg_dump.sql | docker exec -i $(docker ps -q) psql -U ${{secrets.POSTGRES_USER}}  -d  ${{secrets.POSTGRES_DB}}
-          npm run test:e2e
+    - name: Run Unit and Integration tests
+      run: |
+        npm run test
+    - name: Set up Testing Database and Run End to End Tests.
+      run: |
+        cat database/pg_dump.sql | docker exec -i $(docker ps -q) psql -U ${{secrets.POSTGRES_USER}}  -d  ${{secrets.POSTGRES_DB}}
+        npm run test:e2e
 
 
 
