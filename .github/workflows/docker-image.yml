@@ -7,8 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build_test:
-
+  build_release:
     runs-on: ubuntu-latest
     services:
       mysql:
@@ -34,7 +33,7 @@ jobs:
       run: |
         npm install webpack @nestjs/cli
         npm install
-        npm run build
+        npm run build   
     - name: Run Unit and Integration tests
       run: |
         npm run test
