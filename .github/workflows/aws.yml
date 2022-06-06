@@ -1,5 +1,3 @@
-# in this second deployment I am going to use my friend Amine Haj Ali's account because I don't have budgets to creats an ECS Repository 
-# so I am just going to change the access keys of aws 
 
 name: Deploy to Amazon ECS
 
